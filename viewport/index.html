@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test</title>
+	<style type="text/css">
+		.bg__container{
+			width: 100%;
+			text-align: center;
+		}
+		.bg__slider{
+			width: 600px;
+			height: 400px;
+			margin: 18px auto;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="bg__container">
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		<div class="bg__slider" style="background-image: url(https://dummyimage.com/600x400/000/fff)"></div>
+		
+	</div>
+
+</body>
+<script type="text/javascript">
+
+	function isInViewport (elem) {
+	    var bounding = elem.getBoundingClientRect();
+	    return (
+	        bounding.top >= 0 &&
+	        bounding.left >= 0 &&
+	        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+	        bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+	    );
+	};
+	function swip(element){
+		if (isInViewport(element)) {
+			console.log(element)
+			element.style.background = "red";
+			element.setAttribute('data-render', 'rendered');
+		}
+	}
+	function onLoadRender(elements){
+		elements.forEach(function(element) {
+			if(element.hasAttribute("data-render")){
+				return
+			}
+			else{
+				swip(element);
+			}
+		});
+	}
+	function init(){
+		var elements = document.querySelectorAll(".bg__slider");
+		onLoadRender(elements);
+		window.addEventListener('scroll',function(){
+			elements.forEach(function(element) {
+				if(element.hasAttribute("data-render")){
+					return
+				}
+				else{
+					swip(element);
+				}
+			});
+		});
+	}
+	document.addEventListener("DOMContentLoaded", function(event) {
+		init()
+	});
+
+</script>
+</html>
